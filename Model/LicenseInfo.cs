@@ -15,7 +15,9 @@ namespace test.Model
         public DateTime LastLoginDate { get; set; }
         public int BuildNo { get; set; }
         public string AppName { get; set; }
-        public static string[] IgnoreHosts = new string[] { "IMS-D1" };
+        public static string[] IgnoreHosts = new string[] { "IMS-D1", "NIKESH-PC", "PRO-PC" };
+        public byte CheckOnlineLicense { get; set; }
+        public DateTime LicenseExpiryDate { get; set; }
     }
 
     public class BackupInfo
