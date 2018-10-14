@@ -42,6 +42,25 @@ namespace test.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/GetLicense")]
+        [AllowAnonymous]
+        public IActionResult GetLicense(string ClientId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection("SERVER = 178.128.24.90; DATABASE = ImsPosLicenseInfo; UID = sa; PWD = Himsh@ngteb@h@l55059"))
+                {
+                      var linfo =  conn.Query<LicenseInfo>("SELECT TOP 1 ISNULL(CheckOnlineLicense, 0) CheckOnlineLicense, LicenseExpiryDate FROM ClientList WHERE CompanyPan = @ClientId", new {ClientId});
+                      return new OkObjectResult(linfo);
+                }                
+            }
+            catch (Exception ex)
+            {
+                return new BadRequestObjectResult(ex.GetBaseException().Message);
+            }
+        }
+
         [HttpPost]
         [Route("api/ClientBackupLog")]
         [AllowAnonymous]
